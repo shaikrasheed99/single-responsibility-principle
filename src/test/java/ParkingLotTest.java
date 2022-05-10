@@ -17,6 +17,19 @@ public class ParkingLotTest {
         assertNotNull(notificationService);
     }
 
+    @Test
+    void shouldBeAbleToSendNotificationToOwnerWhenParkingLotIsFull() {
+        ParkingLot parkingLot = new ParkingLot(CAPACITY.TEN);
+        NotificationService mockedNotificationService = mock(NotificationService.class);
+        Owner owner = new Owner();
+
+        parkingLot.setNotificationService(mockedNotificationService);
+        parkingLot.setOwner(owner);
+        parkingLot.notifyOwner();
+
+        verify(mockedNotificationService, times(1)).sendNotificationTo(owner);
+    }
+
     @Nested
     class ParkingServiceTests {
         private ParkingLot parkingLot;

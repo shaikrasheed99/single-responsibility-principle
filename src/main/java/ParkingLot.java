@@ -6,6 +6,7 @@ public class ParkingLot {
     private ParkingService parkingService;
     private UnparkingService unparkingService;
     private NotificationService notificationService;
+    private Owner owner;
 
     public ParkingLot(CAPACITY ten) {
         this.capacity = ten;
@@ -41,5 +42,19 @@ public class ParkingLot {
 
     public void setNotificationService(NotificationService notificationService) {
         this.notificationService = notificationService;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
+
+    public void notifyOwner() {
+        if (isFull()) {
+            this.notificationService.sendNotificationTo(this.owner);
+        }
+    }
+
+    private boolean isFull() {
+        return capacity == CAPACITY.TEN;
     }
 }
