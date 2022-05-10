@@ -6,6 +6,17 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 public class ParkingLotTest {
+    @Test
+    void shouldBeAbleToHaveNotificationService() {
+        ParkingLot parkingLot = new ParkingLot(CAPACITY.TEN);
+        NotificationService mockedNotificationService = mock(NotificationService.class);
+
+        parkingLot.setNotificationService(mockedNotificationService);
+        NotificationService notificationService = parkingLot.getNotificationService();
+
+        assertNotNull(notificationService);
+    }
+
     @Nested
     class ParkingServiceTests {
         private ParkingLot parkingLot;

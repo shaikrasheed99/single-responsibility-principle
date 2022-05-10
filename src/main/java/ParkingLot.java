@@ -5,6 +5,7 @@ public class ParkingLot {
     public ArrayList<Vehicle> vehicles;
     private ParkingService parkingService;
     private UnparkingService unparkingService;
+    private NotificationService notificationService;
 
     public ParkingLot(CAPACITY ten) {
         this.capacity = ten;
@@ -32,5 +33,13 @@ public class ParkingLot {
 
     public void unpark(Vehicle vehicle) {
         this.unparkingService.unparkVehicleFrom(this, vehicle);
+    }
+
+    public NotificationService getNotificationService() {
+        return this.notificationService;
+    }
+
+    public void setNotificationService(NotificationService notificationService) {
+        this.notificationService = notificationService;
     }
 }
