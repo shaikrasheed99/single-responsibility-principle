@@ -23,6 +23,6 @@ public class ParkingLotTest {
         parkingLot.setParkingService(mockedParkingService);
         parkingLot.park(vehicle);
 
-        verify(mockedParkingService, times(2)).parkVehicleIn(parkingLot, vehicle);
+        verify(mockedParkingService, times(1)).parkVehicleIn(parkingLot, vehicle);
     }
 }
