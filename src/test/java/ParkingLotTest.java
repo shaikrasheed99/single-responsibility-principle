@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -8,11 +9,19 @@ public class ParkingLotTest {
     @Nested
     class ParkingServiceTests {
 
+        private ParkingLot parkingLot;
+        private ParkingService mockedParkingService;
+
+        @BeforeEach
+        void setUpParkingServiceInParkingLot() {
+            parkingLot = new ParkingLot(CAPACITY.TEN);
+            mockedParkingService = mock(ParkingService.class);
+
+            parkingLot.setParkingService(mockedParkingService);
+        }
+
         @Test
         void shouldBeAbleToHaveInstanceOfParkingService() {
-            ParkingLot parkingLot = new ParkingLot(CAPACITY.TEN);
-
-            parkingLot.setParkingService(new ParkingService());
             ParkingService parkingService = parkingLot.getParkingService();
 
             assertNotNull(parkingService);
@@ -20,11 +29,8 @@ public class ParkingLotTest {
 
         @Test
         void shouldBeAbleToParkAVehicleUsingParkingService() {
-            ParkingLot parkingLot = new ParkingLot(CAPACITY.TEN);
-            ParkingService mockedParkingService = mock(ParkingService.class);
             Vehicle vehicle = new Vehicle();
 
-            parkingLot.setParkingService(mockedParkingService);
             parkingLot.park(vehicle);
 
             verify(mockedParkingService, times(1)).parkVehicleIn(parkingLot, vehicle);
