@@ -5,6 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 public class ParkingLotTest {
+    @Test
+    void shouldBeAbleToHaveInstanceOfUnparkingService() {
+        ParkingLot parkingLot = new ParkingLot(CAPACITY.TEN);
+
+        parkingLot.setUnparkingService(new UnparkingService());
+        UnparkingService unparkingService = parkingLot.getUnparkingService();
+
+        assertNotNull(unparkingService);
+    }
+
     @Nested
     class ParkingServiceTests {
         @Test

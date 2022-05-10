@@ -4,6 +4,7 @@ public class ParkingLot {
     private final CAPACITY capacity;
     public ArrayList<Vehicle> vehicles;
     private ParkingService parkingService;
+    private UnparkingService unparkingService;
 
     public ParkingLot(CAPACITY ten) {
         this.capacity = ten;
@@ -19,5 +20,13 @@ public class ParkingLot {
 
     public void park(Vehicle vehicle) {
         parkingService.parkVehicleIn(this, vehicle);
+    }
+
+    public UnparkingService getUnparkingService() {
+        return this.unparkingService;
+    }
+
+    public void setUnparkingService(UnparkingService unparkingService) {
+        this.unparkingService = unparkingService;
     }
 }
