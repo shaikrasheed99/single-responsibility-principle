@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 public class ParkingLotTest {
@@ -14,7 +14,7 @@ public class ParkingLotTest {
             parkingLot.setParkingService(new ParkingService());
             ParkingService parkingService = parkingLot.getParkingService();
 
-            assertTrue(parkingService instanceof ParkingService);
+            assertNotNull(parkingService);
         }
 
         @Test
