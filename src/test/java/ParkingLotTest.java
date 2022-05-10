@@ -73,12 +73,19 @@ public class ParkingLotTest {
 
     @Nested
     class NotificationServiceTest {
-        @Test
-        void shouldBeAbleToHaveNotificationService() {
-            ParkingLot parkingLot = new ParkingLot(CAPACITY.TEN);
-            NotificationService mockedNotificationService = mock(NotificationService.class);
+        private ParkingLot parkingLot;
+        private NotificationService mockedNotificationService;
+
+        @BeforeEach
+        void setUpNotificationServiceInParkingLot() {
+            parkingLot = new ParkingLot(CAPACITY.TEN);
+            mockedNotificationService = mock(NotificationService.class);
 
             parkingLot.setNotificationService(mockedNotificationService);
+        }
+
+        @Test
+        void shouldBeAbleToHaveNotificationService() {
             NotificationService notificationService = parkingLot.getNotificationService();
 
             assertNotNull(notificationService);
@@ -86,11 +93,8 @@ public class ParkingLotTest {
 
         @Test
         void shouldBeAbleToSendNotificationToOwnerWhenParkingLotIsFull() {
-            ParkingLot parkingLot = new ParkingLot(CAPACITY.TEN);
-            NotificationService mockedNotificationService = mock(NotificationService.class);
             Owner owner = new Owner();
 
-            parkingLot.setNotificationService(mockedNotificationService);
             parkingLot.setOwner(owner);
             parkingLot.notifyOwner();
 
