@@ -6,7 +6,7 @@ import static org.mockito.Mockito.*;
 
 public class ParkingLotTest {
     @Nested
-    class TestingParkingService {
+    class ParkingServiceTests {
         @Test
         void shouldBeAbleToHaveInstanceOfParkingService() {
             ParkingLot parkingLot = new ParkingLot(CAPACITY.TEN);
