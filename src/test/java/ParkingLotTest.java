@@ -6,32 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 public class ParkingLotTest {
-    @Test
-    void shouldBeAbleToHaveNotificationService() {
-        ParkingLot parkingLot = new ParkingLot(CAPACITY.TEN);
-        NotificationService mockedNotificationService = mock(NotificationService.class);
-
-        parkingLot.setNotificationService(mockedNotificationService);
-        NotificationService notificationService = parkingLot.getNotificationService();
-
-        assertNotNull(notificationService);
-    }
-
-    @Test
-    void shouldBeAbleToSendNotificationToOwnerWhenParkingLotIsFull() {
-        ParkingLot parkingLot = new ParkingLot(CAPACITY.TEN);
-        NotificationService mockedNotificationService = mock(NotificationService.class);
-        Owner owner = new Owner();
-
-        parkingLot.setNotificationService(mockedNotificationService);
-        parkingLot.setOwner(owner);
-        parkingLot.notifyOwner();
-
-        verify(mockedNotificationService, times(1)).sendNotificationTo(owner);
-    }
-
     @Nested
     class ParkingServiceTests {
+
         private ParkingLot parkingLot;
         private ParkingService mockedParkingService;
 
@@ -59,10 +36,12 @@ public class ParkingLotTest {
             verify(mockedParkingService, times(1)).parkVehicleIn(parkingLot, vehicle);
         }
 
+
     }
 
     @Nested
     class UnparkingServiceTest {
+
         private ParkingLot parkingLot;
         private UnparkingService mockedUnparkingService;
 
@@ -88,6 +67,34 @@ public class ParkingLotTest {
             parkingLot.unpark(vehicle);
 
             verify(mockedUnparkingService, times(1)).unparkVehicleFrom(parkingLot, vehicle);
+        }
+
+    }
+
+    @Nested
+    class NotificationServiceTest {
+        @Test
+        void shouldBeAbleToHaveNotificationService() {
+            ParkingLot parkingLot = new ParkingLot(CAPACITY.TEN);
+            NotificationService mockedNotificationService = mock(NotificationService.class);
+
+            parkingLot.setNotificationService(mockedNotificationService);
+            NotificationService notificationService = parkingLot.getNotificationService();
+
+            assertNotNull(notificationService);
+        }
+
+        @Test
+        void shouldBeAbleToSendNotificationToOwnerWhenParkingLotIsFull() {
+            ParkingLot parkingLot = new ParkingLot(CAPACITY.TEN);
+            NotificationService mockedNotificationService = mock(NotificationService.class);
+            Owner owner = new Owner();
+
+            parkingLot.setNotificationService(mockedNotificationService);
+            parkingLot.setOwner(owner);
+            parkingLot.notifyOwner();
+
+            verify(mockedNotificationService, times(1)).sendNotificationTo(owner);
         }
     }
 }
