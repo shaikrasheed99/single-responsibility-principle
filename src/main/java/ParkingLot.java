@@ -29,4 +29,8 @@ public class ParkingLot {
     public void setUnparkingService(UnparkingService unparkingService) {
         this.unparkingService = unparkingService;
     }
+
+    public void unpark(Vehicle vehicle) {
+        this.unparkingService.unparkVehicleFrom(this, vehicle);
+    }
 }
