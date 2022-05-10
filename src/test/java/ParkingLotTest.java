@@ -8,7 +8,6 @@ import static org.mockito.Mockito.*;
 public class ParkingLotTest {
     @Nested
     class ParkingServiceTests {
-
         private ParkingLot parkingLot;
         private ParkingService mockedParkingService;
 
@@ -40,11 +39,19 @@ public class ParkingLotTest {
 
     @Nested
     class UnparkingServiceTest {
+        private ParkingLot parkingLot;
+        private UnparkingService mockedUnparkingService;
+
+        @BeforeEach
+        void setUpUnparkingServiceInParkingLot() {
+            parkingLot = new ParkingLot(CAPACITY.TEN);
+            mockedUnparkingService = mock(UnparkingService.class);
+
+            parkingLot.setUnparkingService(mockedUnparkingService);
+        }
+
         @Test
         void shouldBeAbleToHaveInstanceOfUnparkingService() {
-            ParkingLot parkingLot = new ParkingLot(CAPACITY.TEN);
-
-            parkingLot.setUnparkingService(new UnparkingService());
             UnparkingService unparkingService = parkingLot.getUnparkingService();
 
             assertNotNull(unparkingService);
@@ -52,11 +59,8 @@ public class ParkingLotTest {
 
         @Test
         void shouldBeAbleToUnparkUsingUnparkingService() {
-            ParkingLot parkingLot = new ParkingLot(CAPACITY.TEN);
-            UnparkingService mockedUnparkingService = mock(UnparkingService.class);
             Vehicle vehicle = new Vehicle();
 
-            parkingLot.setUnparkingService(mockedUnparkingService);
             parkingLot.unpark(vehicle);
 
             verify(mockedUnparkingService, times(1)).unparkVehicleFrom(parkingLot, vehicle);
